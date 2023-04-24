@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./partials/head', {title: 'Metodo 5'}) %>
+  <body>
+    <%- include('./partials/header', {name: 'Metodo 5 - Constante Multilicativa'}) %>
+    <main>
+      <section class="method-container-form">
+        <form action="/method5/" method="post">
+          <div class="input-container">
+            <div class="wrapper">
+              <input
+                type="text"
+                name="x"
+                id="x"
+                class="number-input"
+                value="<%= locals.oldData && oldData.x ? oldData.x : null%>"
+                required
+              />
+              <label for="x" class="number-label">Semilla 1 (X)</label>
+              <% if (locals.errors && errors.x) { %>
+              <span class="msg-error"> <li><%= errors.x.msg %></li> </span>
+              <% } %>
+            </div>
+            <div class="wrapper">
+              <input
+                type="text"
+                name="x2"
+                id="x"
+                class="number-input"
+                value="<%= locals.oldData && oldData.x2 ? oldData.x2 : null%>"
+                required
+              />
+              <label for="x2" class="number-label">Semilla 2 (X<sub>2</sub>)</label>
+              <% if (locals.errors && errors.x2) { %>
+              <span class="msg-error"> <li><%= errors.x2.msg %></li> </span>
+              <% } %>
+            </div>
+            <div class="wrapper">
+              <input
+                type="text"
+                name="r"
+                id="r"
+                class="number-input"
+                value="<%= locals.oldData && oldData.r ? oldData.r : null%>"
+                required
+              />
+              <label for="x" class="number-label">Rango (r)</label>
+              <% if (locals.errors && errors.r) { %>
+              <span class="msg-error"> <li><%= errors.r.msg %></li> </span>
+              <% } %>
+            </div>
+          </div>
+          <div class="check-container">
+            <label for="valid">Validar numeros</label>
+            <input 
+              type="checkbox" 
+              name="valid" 
+              id="valid" 
+              <% if (locals.errors) { %>
+                checked
+              <% } %>
+              />
+          </div>
+
+          <input type="submit" value="Generar" class="generate" />
+        </form>
+      </section>
+      <% if (!locals.variable) { %>
+      <h1 style="background-color: brown">Ingresa valores en los campos</h1>
+      <% }else{ %>
+      <section class="method-container-table">
+        <div class="table-data">
+          <table class="table table-striped table-success">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">X<sub>0</sub></th>
+                <th scope="col">X<sub>1</sub></th>
+                <th scope="col">Rango</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td><%= variable.x%></td>
+                <td><%= variable.x2%></td>
+                <td><%= variable.r%></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-number">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">X<sub>n</sub></th>
+                <th scope="col">X<sup>1</sup></th>
+                <th scope="col">X<sup>n</sup> * X <sub>1</sub></th>
+                <th scope="col">Intervalo [0,1)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for (const numero of numeros) { %>
+              <tr>
+                <th scope="row"><%=numero.id%></th>
+                <td><%=numero.x%></td>
+                <td><%=numero.x2%></td>
+                <td><%=numero.x3%></td>
+                <td><%=numero.i%></td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <% } %>
+    </main>
+  </body>
+</html>
